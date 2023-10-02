@@ -12,41 +12,73 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(tidyverse)
-pols_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/pols-month.csv")
-pols_data
-names(pols_data)
-pols_data = janitor::clean_names(pols_data)
-names(pols_data) 
-pols_data 
-separate(mon, into = c("year", "month", "day")) 
-select(pols_data, - prez_dem)  
-select(pols_data, -prez_gop)  
-mutate(pols_data, president = gov_gop + sen_gop + rep_gop + prez_dem + gov_dem + sen_dem + rep_dem) 
+#pols_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/pols-month.csv")
+#pols_data
+#names(pols_data)
+#pols_data = janitor::clean_names(pols_data)
+#names(pols_data) 
+#pols_data 
+#separate(mon, into = c("year", "month", "day")) 
+#select(pols_data, - prez_dem)  
+#select(pols_data, -prez_gop)  
+#mutate(pols_data, president = gov_gop + sen_gop + rep_gop + prez_dem + gov_dem + sen_dem + rep_dem) 
 
-snp_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/snp.csv")
-snp_data
-names(snp_data)
-snp_data = janitor::clean_names(snp_data)
-names(snp_data)
-snp_data  
-separate(date, into = c("year", "month", "day"))
+#snp_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/snp.csv")
+#snp_data
+#names(snp_data)
+#snp_data = janitor::clean_names(snp_data)
+#names(snp_data)
+#snp_data  
+#separate(date, into = c("year", "month", "day"))
 
-unemployment_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/unemployment.csv")
-unemployment_data
-names(unemployment_data)
-unemployment_data = janitor::clean_names(unemployment_data)
-names(unemployment_data)
-unemployment_data
+#unemployment_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/unemployment.csv")
+#unemployment_data
+#names(unemployment_data)
+#unemployment_data = janitor::clean_names(unemployment_data)
+#names(unemployment_data)
+#unemployment_data
 
 
 ```
 ## problem 2
 ```{r}
+## mr trashwheel
 library(readxl)
-library(haven)
-trashwheel_data = read_excel("202207 Trash Wheel Collection Data.xlsx")
+trashwheel_data = read_excel("202207 Trash Wheel Collection Data.xlsx") 
 trashwheel_data
 trashwheel_data = janitor::clean_names(trashwheel_data) 
-names(trashwheel_data)
-  
+names(trashwheel_data)  
+drop_na(trashwheel_data)
+mutate(trashwheel_data, homes_powered = weight_tons * 500/30, mr_trashwheel = "MTW")
+
+## prof trashwheel 
+prof_data = read_excel("202207 Trash Wheel Collection Data.xlsx", "Professor Trash Wheel") 
+prof_data
+prof_data = janitor::clean_names(prof_data) 
+names(prof_data)
+drop_na(prof_data)
+prof_data
+mutate(prof_data, prof_trashwheel = "PTW")
+prof_data
+
+##gwynnda trashwheel 
+
+gwynnda_data = read_excel("202207 Trash Wheel Collection Data.xlsx", "Gwynnda Trash Wheel")
+gwynnda_data
+gwynnda_data = janitor::clean_names(gwynnda_data)
+names(gwynnda_data)
+drop_na(gwynnda_data)
+gwynnda_data
+mutate(gwynnda_data, gwynnda_trashwheel = "GTW")
+
+## combining all the trashwheels!!
+
+#all_trashwheels =
+  #bind_rows(trashwheel_data, prof_data,gwynnda_data)
+#all_trashwheels
+
+#all_trashwheels =
+  #left_join(trashwheel_data, prof_data)
+#all_trashwheels
+
 ```
