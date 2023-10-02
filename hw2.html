@@ -653,6 +653,26 @@ names(gwynnda_data)</code></pre>
   #left_join(trashwheel_data, prof_data)
 #all_trashwheels</code></pre>
 </div>
+<div id="problem-3" class="section level2">
+<h2>problem 3</h2>
+<pre class="r"><code>baseline_data = read_csv(&quot;data_mci/MCI_baseline.csv&quot;)</code></pre>
+<pre><code>## New names:
+## Rows: 484 Columns: 6
+## ── Column specification
+## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
+## (6): ...1, Age at the study baseline, 1 = Male, 0 = Female, Years of edu...
+## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+## Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## • `` -&gt; `...1`</code></pre>
+<pre class="r"><code>baseline_data = janitor::clean_names(baseline_data)
+names(baseline_data)</code></pre>
+<pre><code>## [1] &quot;x1&quot;                                                                                       
+## [2] &quot;age_at_the_study_baseline&quot;                                                                
+## [3] &quot;x1_male_0_female&quot;                                                                         
+## [4] &quot;years_of_education&quot;                                                                       
+## [5] &quot;x1_apoe4_carrier_0_apoe4_non_carrier&quot;                                                     
+## [6] &quot;age_at_the_onset_of_mci_missing_if_a_subject_remains_mci_free_during_the_follow_up_period&quot;</code></pre>
+</div>
 
 
 

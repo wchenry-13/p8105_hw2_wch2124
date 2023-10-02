@@ -82,3 +82,15 @@ mutate(gwynnda_data, gwynnda_trashwheel = "GTW")
 #all_trashwheels
 
 ```
+
+## problem 3
+
+```{r}
+baseline_data = read_csv("data_mci/MCI_baseline.csv")
+baseline_data = janitor::clean_names(baseline_data)
+names(baseline_data)
+
+
+
+```
+
