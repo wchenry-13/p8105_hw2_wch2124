@@ -397,35 +397,22 @@ pre code {
 #names(unemployment_data)
 #unemployment_data = janitor::clean_names(unemployment_data)
 #names(unemployment_data)
-#unemployment_data</code></pre>
+#unemployment_data
+
+#all_datasets = 
+  #bind_rows(pols_data, snp_data, unemployment_data)
+#all_datasets</code></pre>
 <div id="problem-2" class="section level2">
 <h2>problem 2</h2>
 <pre class="r"><code>## mr trashwheel
+
 library(readxl)
 trashwheel_data = read_excel(&quot;202207 Trash Wheel Collection Data.xlsx&quot;) </code></pre>
 <pre><code>## New names:
 ## • `` -&gt; `...15`
 ## • `` -&gt; `...16`</code></pre>
-<pre class="r"><code>trashwheel_data</code></pre>
-<pre><code>## # A tibble: 548 × 16
-##    Dumpster Month Year  Date                `Weight (tons)`
-##       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dttm&gt;                        &lt;dbl&gt;
-##  1        1 May   2014  2014-05-16 00:00:00            4.31
-##  2        2 May   2014  2014-05-16 00:00:00            2.74
-##  3        3 May   2014  2014-05-16 00:00:00            3.45
-##  4        4 May   2014  2014-05-17 00:00:00            3.1 
-##  5        5 May   2014  2014-05-17 00:00:00            4.06
-##  6        6 May   2014  2014-05-20 00:00:00            2.71
-##  7        7 May   2014  2014-05-21 00:00:00            1.91
-##  8        8 May   2014  2014-05-28 00:00:00            3.7 
-##  9        9 June  2014  2014-06-05 00:00:00            2.52
-## 10       10 June  2014  2014-06-11 00:00:00            3.76
-## # ℹ 538 more rows
-## # ℹ 11 more variables: `Volume (cubic yards)` &lt;dbl&gt;, `Plastic Bottles` &lt;dbl&gt;,
-## #   Polystyrene &lt;dbl&gt;, `Cigarette Butts` &lt;dbl&gt;, `Glass Bottles` &lt;dbl&gt;,
-## #   `Grocery Bags` &lt;dbl&gt;, `Chip Bags` &lt;dbl&gt;, `Sports Balls` &lt;dbl&gt;,
-## #   `Homes Powered*` &lt;dbl&gt;, ...15 &lt;lgl&gt;, ...16 &lt;lgl&gt;</code></pre>
-<pre class="r"><code>trashwheel_data = janitor::clean_names(trashwheel_data) 
+<pre class="r"><code>#trashwheel_data
+trashwheel_data = janitor::clean_names(trashwheel_data)
 names(trashwheel_data)  </code></pre>
 <pre><code>##  [1] &quot;dumpster&quot;           &quot;month&quot;              &quot;year&quot;              
 ##  [4] &quot;date&quot;               &quot;weight_tons&quot;        &quot;volume_cubic_yards&quot;
@@ -433,7 +420,7 @@ names(trashwheel_data)  </code></pre>
 ## [10] &quot;glass_bottles&quot;      &quot;grocery_bags&quot;       &quot;chip_bags&quot;         
 ## [13] &quot;sports_balls&quot;       &quot;homes_powered&quot;      &quot;x15&quot;               
 ## [16] &quot;x16&quot;</code></pre>
-<pre class="r"><code>drop_na(trashwheel_data)</code></pre>
+<pre class="r"><code>drop_na(trashwheel_data) </code></pre>
 <pre><code>## # A tibble: 0 × 16
 ## # ℹ 16 variables: dumpster &lt;dbl&gt;, month &lt;chr&gt;, year &lt;chr&gt;, date &lt;dttm&gt;,
 ## #   weight_tons &lt;dbl&gt;, volume_cubic_yards &lt;dbl&gt;, plastic_bottles &lt;dbl&gt;,
@@ -460,26 +447,10 @@ names(trashwheel_data)  </code></pre>
 ## #   chip_bags &lt;dbl&gt;, sports_balls &lt;dbl&gt;, homes_powered &lt;dbl&gt;, x15 &lt;lgl&gt;,
 ## #   x16 &lt;lgl&gt;, mr_trashwheel &lt;chr&gt;</code></pre>
 <pre class="r"><code>## prof trashwheel 
+
 prof_data = read_excel(&quot;202207 Trash Wheel Collection Data.xlsx&quot;, &quot;Professor Trash Wheel&quot;) 
-prof_data</code></pre>
-<pre><code>## # A tibble: 95 × 13
-##    Dumpster Month     Year Date                `Weight (tons)`
-##       &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dttm&gt;                        &lt;dbl&gt;
-##  1        1 January   2017 2017-01-02 00:00:00            1.79
-##  2        2 January   2017 2017-01-30 00:00:00            1.58
-##  3        3 February  2017 2017-02-26 00:00:00            2.32
-##  4        4 February  2017 2017-02-26 00:00:00            3.72
-##  5        5 February  2017 2017-02-28 00:00:00            1.45
-##  6        6 March     2017 2017-03-30 00:00:00            1.71
-##  7        7 April     2017 2017-04-01 00:00:00            1.82
-##  8        8 April     2017 2017-04-20 00:00:00            2.37
-##  9        9 May       2017 2017-05-10 00:00:00            2.64
-## 10       10 May       2017 2017-05-26 00:00:00            2.78
-## # ℹ 85 more rows
-## # ℹ 8 more variables: `Volume (cubic yards)` &lt;dbl&gt;, `Plastic Bottles` &lt;dbl&gt;,
-## #   Polystyrene &lt;dbl&gt;, `Cigarette Butts` &lt;dbl&gt;, `Glass Bottles` &lt;dbl&gt;,
-## #   `Grocery Bags` &lt;dbl&gt;, `Chip Bags` &lt;dbl&gt;, `Homes Powered*` &lt;dbl&gt;</code></pre>
-<pre class="r"><code>prof_data = janitor::clean_names(prof_data) 
+#prof_data
+prof_data = janitor::clean_names(prof_data) 
 names(prof_data)</code></pre>
 <pre><code>##  [1] &quot;dumpster&quot;           &quot;month&quot;              &quot;year&quot;              
 ##  [4] &quot;date&quot;               &quot;weight_tons&quot;        &quot;volume_cubic_yards&quot;
@@ -522,64 +493,14 @@ names(prof_data)</code></pre>
 ## # ℹ 7 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
 ## #   cigarette_butts &lt;dbl&gt;, glass_bottles &lt;dbl&gt;, grocery_bags &lt;dbl&gt;,
 ## #   chip_bags &lt;dbl&gt;, homes_powered &lt;dbl&gt;</code></pre>
-<pre class="r"><code>mutate(prof_data, prof_trashwheel = &quot;PTW&quot;)</code></pre>
-<pre><code>## # A tibble: 95 × 14
-##    dumpster month     year date                weight_tons volume_cubic_yards
-##       &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dttm&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
-##  1        1 January   2017 2017-01-02 00:00:00        1.79                 15
-##  2        2 January   2017 2017-01-30 00:00:00        1.58                 15
-##  3        3 February  2017 2017-02-26 00:00:00        2.32                 18
-##  4        4 February  2017 2017-02-26 00:00:00        3.72                 15
-##  5        5 February  2017 2017-02-28 00:00:00        1.45                 15
-##  6        6 March     2017 2017-03-30 00:00:00        1.71                 15
-##  7        7 April     2017 2017-04-01 00:00:00        1.82                 15
-##  8        8 April     2017 2017-04-20 00:00:00        2.37                 15
-##  9        9 May       2017 2017-05-10 00:00:00        2.64                 15
-## 10       10 May       2017 2017-05-26 00:00:00        2.78                 15
-## # ℹ 85 more rows
-## # ℹ 8 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
-## #   cigarette_butts &lt;dbl&gt;, glass_bottles &lt;dbl&gt;, grocery_bags &lt;dbl&gt;,
-## #   chip_bags &lt;dbl&gt;, homes_powered &lt;dbl&gt;, prof_trashwheel &lt;chr&gt;</code></pre>
-<pre class="r"><code>prof_data</code></pre>
-<pre><code>## # A tibble: 95 × 13
-##    dumpster month     year date                weight_tons volume_cubic_yards
-##       &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dttm&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
-##  1        1 January   2017 2017-01-02 00:00:00        1.79                 15
-##  2        2 January   2017 2017-01-30 00:00:00        1.58                 15
-##  3        3 February  2017 2017-02-26 00:00:00        2.32                 18
-##  4        4 February  2017 2017-02-26 00:00:00        3.72                 15
-##  5        5 February  2017 2017-02-28 00:00:00        1.45                 15
-##  6        6 March     2017 2017-03-30 00:00:00        1.71                 15
-##  7        7 April     2017 2017-04-01 00:00:00        1.82                 15
-##  8        8 April     2017 2017-04-20 00:00:00        2.37                 15
-##  9        9 May       2017 2017-05-10 00:00:00        2.64                 15
-## 10       10 May       2017 2017-05-26 00:00:00        2.78                 15
-## # ℹ 85 more rows
-## # ℹ 7 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
-## #   cigarette_butts &lt;dbl&gt;, glass_bottles &lt;dbl&gt;, grocery_bags &lt;dbl&gt;,
-## #   chip_bags &lt;dbl&gt;, homes_powered &lt;dbl&gt;</code></pre>
-<pre class="r"><code>##gwynnda trashwheel 
+<pre class="r"><code>prof_data &lt;- mutate(prof_data, prof_trashwheel = &quot;PTW&quot;, year = as.character(year))
+#prof_data
+
+##gwynnda trashwheel 
 
 gwynnda_data = read_excel(&quot;202207 Trash Wheel Collection Data.xlsx&quot;, &quot;Gwynnda Trash Wheel&quot;)
-gwynnda_data</code></pre>
-<pre><code>## # A tibble: 108 × 11
-##    Dumpster Month   Year Date                `Weight (tons)`
-##       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dttm&gt;                        &lt;dbl&gt;
-##  1        1 July    2021 2021-07-03 00:00:00            0.93
-##  2        2 July    2021 2021-07-07 00:00:00            2.26
-##  3        3 July    2021 2021-07-07 00:00:00            1.62
-##  4        4 July    2021 2021-07-16 00:00:00            1.76
-##  5        5 July    2021 2021-07-30 00:00:00            1.53
-##  6        6 August  2021 2021-08-11 00:00:00            2.06
-##  7        7 August  2021 2021-08-14 00:00:00            1.9 
-##  8        8 August  2021 2021-08-16 00:00:00            2.16
-##  9        9 August  2021 2021-08-16 00:00:00            2.6 
-## 10       10 August  2021 2021-08-17 00:00:00            3.21
-## # ℹ 98 more rows
-## # ℹ 6 more variables: `Volume (cubic yards)` &lt;dbl&gt;, `Plastic Bottles` &lt;dbl&gt;,
-## #   Polystyrene &lt;dbl&gt;, `Cigarette Butts` &lt;dbl&gt;, `Plastic Bags` &lt;dbl&gt;,
-## #   `Homes Powered*` &lt;dbl&gt;</code></pre>
-<pre class="r"><code>gwynnda_data = janitor::clean_names(gwynnda_data)
+#gwynnda_data
+gwynnda_data = janitor::clean_names(gwynnda_data)
 names(gwynnda_data)</code></pre>
 <pre><code>##  [1] &quot;dumpster&quot;           &quot;month&quot;              &quot;year&quot;              
 ##  [4] &quot;date&quot;               &quot;weight_tons&quot;        &quot;volume_cubic_yards&quot;
@@ -625,53 +546,50 @@ names(gwynnda_data)</code></pre>
 ## # ℹ 98 more rows
 ## # ℹ 5 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
 ## #   cigarette_butts &lt;dbl&gt;, plastic_bags &lt;dbl&gt;, homes_powered &lt;dbl&gt;</code></pre>
-<pre class="r"><code>mutate(gwynnda_data, gwynnda_trashwheel = &quot;GTW&quot;)</code></pre>
-<pre><code>## # A tibble: 108 × 12
-##    dumpster month   year date                weight_tons volume_cubic_yards
-##       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dttm&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
-##  1        1 July    2021 2021-07-03 00:00:00        0.93                 15
-##  2        2 July    2021 2021-07-07 00:00:00        2.26                 15
-##  3        3 July    2021 2021-07-07 00:00:00        1.62                 15
-##  4        4 July    2021 2021-07-16 00:00:00        1.76                 15
-##  5        5 July    2021 2021-07-30 00:00:00        1.53                 15
-##  6        6 August  2021 2021-08-11 00:00:00        2.06                 15
-##  7        7 August  2021 2021-08-14 00:00:00        1.9                  15
-##  8        8 August  2021 2021-08-16 00:00:00        2.16                 15
-##  9        9 August  2021 2021-08-16 00:00:00        2.6                  15
-## 10       10 August  2021 2021-08-17 00:00:00        3.21                 15
-## # ℹ 98 more rows
-## # ℹ 6 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
-## #   cigarette_butts &lt;dbl&gt;, plastic_bags &lt;dbl&gt;, homes_powered &lt;dbl&gt;,
+<pre class="r"><code>gwynnda_data &lt;- mutate(gwynnda_data, gwynnda_trashwheel = &quot;GTW&quot;, year = as.character(year))
+#gwynnda_data
+
+## combining all the trashwheels!!
+
+all_trashwheels =
+ bind_rows(trashwheel_data, prof_data,gwynnda_data)
+all_trashwheels</code></pre>
+<pre><code>## # A tibble: 751 × 19
+##    dumpster month year  date                weight_tons volume_cubic_yards
+##       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dttm&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
+##  1        1 May   2014  2014-05-16 00:00:00        4.31                 18
+##  2        2 May   2014  2014-05-16 00:00:00        2.74                 13
+##  3        3 May   2014  2014-05-16 00:00:00        3.45                 15
+##  4        4 May   2014  2014-05-17 00:00:00        3.1                  15
+##  5        5 May   2014  2014-05-17 00:00:00        4.06                 18
+##  6        6 May   2014  2014-05-20 00:00:00        2.71                 13
+##  7        7 May   2014  2014-05-21 00:00:00        1.91                  8
+##  8        8 May   2014  2014-05-28 00:00:00        3.7                  16
+##  9        9 June  2014  2014-06-05 00:00:00        2.52                 14
+## 10       10 June  2014  2014-06-11 00:00:00        3.76                 18
+## # ℹ 741 more rows
+## # ℹ 13 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
+## #   cigarette_butts &lt;dbl&gt;, glass_bottles &lt;dbl&gt;, grocery_bags &lt;dbl&gt;,
+## #   chip_bags &lt;dbl&gt;, sports_balls &lt;dbl&gt;, homes_powered &lt;dbl&gt;, x15 &lt;lgl&gt;,
+## #   x16 &lt;lgl&gt;, prof_trashwheel &lt;chr&gt;, plastic_bags &lt;dbl&gt;,
 ## #   gwynnda_trashwheel &lt;chr&gt;</code></pre>
-<pre class="r"><code>## combining all the trashwheels!!
-
-#all_trashwheels =
-  #bind_rows(trashwheel_data, prof_data,gwynnda_data)
-#all_trashwheels
-
-#all_trashwheels =
-  #left_join(trashwheel_data, prof_data)
-#all_trashwheels</code></pre>
 </div>
 <div id="problem-3" class="section level2">
 <h2>problem 3</h2>
-<pre class="r"><code>baseline_data = read_csv(&quot;data_mci/MCI_baseline.csv&quot;)</code></pre>
-<pre><code>## New names:
-## Rows: 484 Columns: 6
-## ── Column specification
-## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
-## (6): ...1, Age at the study baseline, 1 = Male, 0 = Female, Years of edu...
-## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
-## Specify the column types or set `show_col_types = FALSE` to quiet this message.
-## • `` -&gt; `...1`</code></pre>
-<pre class="r"><code>baseline_data = janitor::clean_names(baseline_data)
-names(baseline_data)</code></pre>
-<pre><code>## [1] &quot;x1&quot;                                                                                       
-## [2] &quot;age_at_the_study_baseline&quot;                                                                
-## [3] &quot;x1_male_0_female&quot;                                                                         
-## [4] &quot;years_of_education&quot;                                                                       
-## [5] &quot;x1_apoe4_carrier_0_apoe4_non_carrier&quot;                                                     
-## [6] &quot;age_at_the_onset_of_mci_missing_if_a_subject_remains_mci_free_during_the_follow_up_period&quot;</code></pre>
+<pre class="r"><code>baseline_data = read.csv(&quot;data_mci/MCI_baseline.csv&quot;, skip = 1) |&gt; 
+janitor::clean_names() |&gt;
+  mutate(
+    sex = case_match(
+      sex, 
+      1 ~ &quot;male&quot;, 
+      0 ~ &quot;female&quot;
+    ),
+    apoe4 = case_match(
+      apoe4,
+      1 ~ &quot;carrier&quot;,
+      0 ~ &quot;noncarrier&quot;
+    )
+  ) </code></pre>
 </div>
 
 

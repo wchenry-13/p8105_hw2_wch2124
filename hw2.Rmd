@@ -38,57 +38,77 @@ library(tidyverse)
 #names(unemployment_data)
 #unemployment_data
 
-
+#all_datasets = 
+  #bind_rows(pols_data, snp_data, unemployment_data)
+#all_datasets
 ```
+
 ## problem 2
+
 ```{r}
 ## mr trashwheel
+
 library(readxl)
 trashwheel_data = read_excel("202207 Trash Wheel Collection Data.xlsx") 
-trashwheel_data
-trashwheel_data = janitor::clean_names(trashwheel_data) 
+#trashwheel_data
+trashwheel_data = janitor::clean_names(trashwheel_data)
 names(trashwheel_data)  
-drop_na(trashwheel_data)
+drop_na(trashwheel_data) 
 mutate(trashwheel_data, homes_powered = weight_tons * 500/30, mr_trashwheel = "MTW")
 
 ## prof trashwheel 
+
 prof_data = read_excel("202207 Trash Wheel Collection Data.xlsx", "Professor Trash Wheel") 
-prof_data
+#prof_data
 prof_data = janitor::clean_names(prof_data) 
 names(prof_data)
 drop_na(prof_data)
 prof_data
-mutate(prof_data, prof_trashwheel = "PTW")
-prof_data
+prof_data <- mutate(prof_data, prof_trashwheel = "PTW", year = as.character(year))
+#prof_data
 
 ##gwynnda trashwheel 
 
 gwynnda_data = read_excel("202207 Trash Wheel Collection Data.xlsx", "Gwynnda Trash Wheel")
-gwynnda_data
+#gwynnda_data
 gwynnda_data = janitor::clean_names(gwynnda_data)
 names(gwynnda_data)
 drop_na(gwynnda_data)
 gwynnda_data
-mutate(gwynnda_data, gwynnda_trashwheel = "GTW")
+gwynnda_data <- mutate(gwynnda_data, gwynnda_trashwheel = "GTW", year = as.character(year))
+#gwynnda_data
 
 ## combining all the trashwheels!!
 
-#all_trashwheels =
-  #bind_rows(trashwheel_data, prof_data,gwynnda_data)
-#all_trashwheels
+all_trashwheels =
+ bind_rows(trashwheel_data, prof_data,gwynnda_data)
+all_trashwheels
 
-#all_trashwheels =
-  #left_join(trashwheel_data, prof_data)
-#all_trashwheels
+
 
 ```
 
 ## problem 3
 
 ```{r}
-baseline_data = read_csv("data_mci/MCI_baseline.csv")
-baseline_data = janitor::clean_names(baseline_data)
-names(baseline_data)
+baseline_data = read.csv("data_mci/MCI_baseline.csv", skip = 1) |> 
+janitor::clean_names() |>
+  mutate(
+    sex = case_match(
+      sex, 
+      1 ~ "male", 
+      0 ~ "female"
+    ),
+    apoe4 = case_match(
+      apoe4,
+      1 ~ "carrier",
+      0 ~ "noncarrier"
+    )
+  ) 
+  
+      
+  
+
 
 
 
