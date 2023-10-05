@@ -8,48 +8,48 @@ date: '2023-09-28'
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##problem 1
+## problem 1
 
 ```{r}
 library(tidyverse)
-#pols_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/pols-month.csv")
+pols_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/pols-month.csv")
 #pols_data
-#names(pols_data)
-#pols_data = janitor::clean_names(pols_data)
-#names(pols_data) 
-#pols_data 
+names(pols_data)
+pols_data = janitor::clean_names(pols_data)
+names(pols_data) 
+pols_data 
 #separate(mon, into = c("year", "month", "day")) 
-#select(pols_data, - prez_dem)  
-#select(pols_data, -prez_gop)  
-#mutate(pols_data, president = gov_gop + sen_gop + rep_gop + prez_dem + gov_dem + sen_dem + rep_dem) 
+select(pols_data, - prez_dem)  
+select(pols_data, -prez_gop)  
+mutate(pols_data, president = gov_gop + sen_gop + rep_gop + prez_dem + gov_dem + sen_dem + rep_dem) 
 
-#snp_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/snp.csv")
+snp_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/snp.csv")
 #snp_data
-#names(snp_data)
-#snp_data = janitor::clean_names(snp_data)
-#names(snp_data)
-#snp_data  
-#separate(date, into = c("year", "month", "day"))
+#separate(date, into = c("month", "day", "year"), convert = TRUE) |>
+ # arrange(year, month) |>
+  #mutate(month = month.name[month]) |>
+  #select(year, month, close) 
 
-#unemployment_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/unemployment.csv")
+unemployment_data = read.csv("~/p8105_hw2_wch2124/fivethirtyeight_datasets/unemployment.csv")
 #unemployment_data
-#names(unemployment_data)
-#unemployment_data = janitor::clean_names(unemployment_data)
-#names(unemployment_data)
-#unemployment_data
+names(unemployment_data)
+unemployment_data = janitor::clean_names(unemployment_data)
+names(unemployment_data)
+unemployment_data
 
-#all_datasets = 
-  #bind_rows(pols_data, snp_data, unemployment_data)
-#all_datasets
+all_datasets = 
+  bind_rows(pols_data, snp_data, unemployment_data)
+all_datasets
 ```
 
 ## problem 2
 
+The Mr. Trash Wheel dataset consisted of 585 observations of 16 variables, the Professor Trash Wheel dataset consisted of 107 observations of 14 variables, and the Gwynnda Trash Wheel dataset consisted of 157 observations of 13 variables. Some of the variables observed were plastic bags, cigarette butts, and homes powered. The total weight in trash collected by Mr. Trash Wheel was 1,875 pounds, and in July 2021 Gwynnda Trash Wheel collected 16,300 cigarette butts. 
 ```{r}
 ## mr trashwheel
 
 library(readxl)
-trashwheel_data = read_excel("202207 Trash Wheel Collection Data.xlsx") 
+trashwheel_data = read_excel("202309 Trash Wheel Collection Data.xlsx") 
 #trashwheel_data
 trashwheel_data = janitor::clean_names(trashwheel_data)
 names(trashwheel_data)  
@@ -58,7 +58,7 @@ mutate(trashwheel_data, homes_powered = weight_tons * 500/30, mr_trashwheel = "M
 
 ## prof trashwheel 
 
-prof_data = read_excel("202207 Trash Wheel Collection Data.xlsx", "Professor Trash Wheel") 
+prof_data = read_excel("202309 Trash Wheel Collection Data.xlsx", "Professor Trash Wheel") 
 #prof_data
 prof_data = janitor::clean_names(prof_data) 
 names(prof_data)
@@ -69,7 +69,7 @@ prof_data <- mutate(prof_data, prof_trashwheel = "PTW", year = as.character(year
 
 ##gwynnda trashwheel 
 
-gwynnda_data = read_excel("202207 Trash Wheel Collection Data.xlsx", "Gwynnda Trash Wheel")
+gwynnda_data = read_excel("202309 Trash Wheel Collection Data.xlsx", "Gwynnda Trash Wheel")
 #gwynnda_data
 gwynnda_data = janitor::clean_names(gwynnda_data)
 names(gwynnda_data)
@@ -90,6 +90,7 @@ all_trashwheels
 
 ## problem 3
 
+To import the baseline and amyloid datasets, I had to use the mutate function to case match the sex and the apoe4 variables. This was done to change the variables from numeric to categorical. After that, I had to filter the age of onset to be greater than the current age to remove the "." that were present in the dataset. There were 479 participants in the baseline dataset, with an average age of about 65. 93 participants developed MCI, and the proportion of women are APOE4 carriers is 210. For the amyloid dataset, I cleaned the names and exluded the NA values. I also changed the column name from "study_id" to just "id", so it matched the column baseline dataset and could be combined together. There was overlap in the "id" column of both datsets, meaning that there were participants that were in both datsets. 
 ```{r}
 baseline_data = read.csv("data_mci/MCI_baseline.csv", skip = 1) |> 
 janitor::clean_names() |>
@@ -104,11 +105,31 @@ janitor::clean_names() |>
       1 ~ "carrier",
       0 ~ "noncarrier"
     )
-  ) 
-  
-      
-  
+  ) |> 
+filter(age_at_onset == "." | age_at_onset > current_age)
 
+
+amyloid_data = read.csv("data_mci/mci_amyloid.csv", skip = 1) |> 
+  janitor::clean_names()
+names(amyloid_data)
+drop_na(amyloid_data)
+
+colnames(amyloid_data)[colnames(amyloid_data) == "study_id"] ="id"
+amyloid_data
+
+combined_data = 
+  full_join(baseline_data, amyloid_data, by = c("id"))
+combined_data
+
+nrow(baseline_data) # how many ppl were recruited 
+mean(baseline_data$current_age) # mean age of participants 
+
+female_apoe4 = 
+ filter(baseline_data, sex == "female")
+nrow(female_apoe4) ## proportion of female carriers 
+
+baseline_data <- filter(baseline_data, age_at_onset != ".")  
+nrow(baseline_data)
 
 
 
